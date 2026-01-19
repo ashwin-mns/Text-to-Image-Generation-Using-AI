@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Image Generator</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="background-glow"></div>
+
+    <div class="app-wrapper">
+        <!-- Sidebar for History -->
+        <aside class="history-sidebar">
+            <div class="sidebar-header">
+                <h3><i class="fas fa-history"></i> Recent</h3>
+                <button id="clearHistoryBtn" title="Clear History"><i class="fas fa-trash-alt"></i></button>
+            </div>
+            <div class="history-grid" id="historyGrid">
+                <!-- History items will be injected here -->
+                <div class="empty-history">No images yet</div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="container">
+            <h1>Imagine & Create</h1>
+            <p class="subtitle">Turn your words into stunning AI art instantly.</p>
+
+            <div class="input-section">
+                <div class="input-group">
+                    <input type="text" id="promptInput" placeholder="A futuristic city with flying cars at sunset..."
+                        autocomplete="off">
+                    <button id="generateBtn">
+                        <span class="btn-text">Generate</span>
+                        <i class="fas fa-magic"></i>
+                    </button>
+                </div>
+
+                <!-- Advanced Settings Toggle -->
+                <div class="settings-toggle">
+                    <button id="toggleSettingsBtn" type="button">
+                        <i class="fas fa-sliders-h"></i> Advanced Settings
+                    </button>
+                </div>
+
+                <!-- Advanced Settings Panel -->
+                <div class="settings-panel hidden" id="settingsPanel">
+                    <div class="setting-item">
+                        <label>Width: <span id="widthValue">512</span>px</label>
+                        <input type="range" id="widthInput" min="256" max="1024" step="64" value="512">
+                    </div>
+                    <div class="setting-item">
+                        <label>Height: <span id="heightValue">512</span>px</label>
+                        <input type="range" id="heightInput" min="256" max="1024" step="64" value="512">
+                    </div>
+                    <div class="setting-item">
+                        <label>Seed (Optional):</label>
+                        <input type="number" id="seedInput" placeholder="Random" min="0">
+                    </div>
+                </div>
+            </div>
+
+            <div class="result-area" id="resultArea">
+                <div class="placeholder-content">
+                    <i class="far fa-image"></i>
+                    <p>Your creation will appear here</p>
+                </div>
+                <div class="loading-spinner hidden" id="loader">
+                    <div class="spinner"></div>
+                    <p>Dreaming...</p>
+                </div>
+                <img id="generatedImage" class="hidden" alt="Generated AI Image">
+
+                <!-- Action Buttons overlay (Download/Expand) -->
+                <div class="image-actions hidden" id="imageActions">
+                    <a id="downloadBtn" class="action-btn" download="creation.jpg" title="Download">
+                        <i class="fas fa-download"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="error-msg hidden" id="errorMsg"></div>
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+
+</html>
